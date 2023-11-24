@@ -550,17 +550,23 @@ const products = [
 /*
 Today I want to introduce my code for homework2
 it include 4 request
-We have 1 product list and complete the 4 requirements
+We have a product list and complete the 4 requirements
   homeWork2 : check a list procduct
   There is a product list as above
-  request 1: output include id and title with largest price in that list;
-  request 2: total price of all product
-  request 3:  count product folow category
-  and request 4: output a list image of all the list products 
+  request 1: output include id and title with highest price in that list;
+  request 2: Calculate the total price of all products
+  request 3:  Count the number of products in each category
+  and request 4: Get a list of all product image links:
 
  */
 
-// request 1: outnput include id and title with largest price in that list;
+// request 1: outnput include id and title with highest price in that list;
+/*
+Find the product(s) with the highest price:
+The findMaxPrice function iterates over the products array and identifies the product(s) with the highest price.
+It stores the highest price in the variable max and save index into id array.
+Finally, it prints the lines with the ID and title of the product with the highest price.
+  */
 function findMaxprice(products) {
   //declare variable emty
   let max = null;
@@ -582,21 +588,33 @@ function findMaxprice(products) {
     console.log("ID = " + products[item].id + " and Title is " + products[item].title);
   });
 }
-  // findMaxprice(products);
+// findMaxprice(products);
 
-// request 2: total price of all product
+// request 2: Calculate the total price of all products: 
+/*
+we have two ways.
+The first way uses a forEach loop to iterate over the products and add the price to the Total variable.
+The second way uses the reduce function on the product array to calculate the total price.
+It creates the total variable to 0 and adds the price of each product to it.
+*/
 // have 2 way
 //first
 let Total = 0
 products.forEach((Element)=>{
   Total += (Element.price);
 });
-  // console.log(Total);
+  //  console.log(Total);
 //help us calculate the total
 let total = products.reduce((subtotal,product)=> subtotal = subtotal+ product.price, 0 );
-//  console.log(total);
+  // console.log(total);
 
-//  request 3:  count product folow category
+//  request 3:  Count the number of products in each category: 
+/*
+The countProductsByCategory function counts the number of products in each category.
+It iterates over the products array and checks if a category is already present in the categories array.
+If not, it adds the category to the array and counts the number of products in that category by iterating over the products.
+Finally, it prints the category name and quantity.
+ */
 // create functon filter categ
 function filer(products){
   category =[];
@@ -625,9 +643,16 @@ function filer(products){
   });
 
 }
-// filer(products);
+//  filer(products);
 
-// request 4: output a list image of all the list products 
+// request 4: Get a list of all product image links:
+/* 
+Get a list of all product image links:
+The getLinkImage function collects all image links from the products array. 
+It iterates over each product, gets the array of images, and checks if it's an array or not. 
+If true, it will iterate over the images array and collect each image link in the linkImages array. 
+Finally, it returns the linkImage array 
+*/
 function getLinkImage(products) {
   let linkImage = [];
   products.forEach((element) => {
@@ -641,6 +666,6 @@ function getLinkImage(products) {
   return linkImage;
 }
 
-// const linkImages = getLinkImage(products);
-// console.log("Number of image links:", linkImages.length);
-// console.log("Image links:", linkImages);
+const linkImages = getLinkImage(products);
+console.log("Number of image links:", linkImages.length);
+console.log("Image links:", linkImages);
