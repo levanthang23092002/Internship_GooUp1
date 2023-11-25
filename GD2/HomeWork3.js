@@ -545,88 +545,287 @@ const products = [
     ]
   }
 ]
+//                      ---------Home Work 3-----------
+// Request 1: Reverse the list
+// Do not ues reverse function
+  function noReverse(products){
+    let i =products.length
+    let reverseProduct2 = [];
+    for( i ; i >= 0 ; i-- ){
+      reverseProduct2.push(products[i]);
+    }
+    return reverseProduct2;
+  }
+  // console.log(noReverse(products));
+// Use reverse function
+  let reverseProduct = products.reverse();
+  // console.log(reverseProduct);
+  // console.log(products);
+// Request 2: sort by title in products 
+// use sort function 
+  let sortProduct = products.sort((a,b) => a.title.localeCompare(b.title));
+  // console.log(sortProduct);
+
+//do not use sort function 
+ //use 
+    function swap(arr, a, b) {
+      let temp = arr[a];
+      arr[a] = arr[b];
+      arr[b] = temp;
+    }
+    
+ function selectionSort(products) {
+  const { length } = products;
+  let minIndex;
+  for (let i = 0; i < length - 1; i++) {
+      minIndex = i;
+      for (let j = i; j < length; j++) {
+          if (products[minIndex].title > products[j].title) {
+              minIndex = j;
+          }
+      }
+      if (i !== minIndex) {
+          swap(products, i, minIndex);
+      }
+  }
+  return products;
+}
+// console.log(selectionSort(products));
+
+
+// Request 3: find flolow id, title, price, rating, category, desciption,stock
+//use find function
+const readline = require('readline');
+
+function findInProduct(products) {
+  console.log("Nhập 1 để tìm kiếm theo id");
+  console.log("Nhập 2 để tìm kiếm theo title");
+  console.log("Nhập 3 để tìm kiếm theo description");
+  console.log("Nhập 4 để tìm kiếm theo price");
+  console.log("Nhập 5 để tìm kiếm theo rating");
+  console.log("Nhập 6 để tìm kiếm theo stock");
+  console.log("Nhập 7 để tìm kiếm theo category");
+
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+  });
+
+  rl.question('Nhập vào một giá trị: ', (userInput) => {
+    const inputNumber = parseInt(userInput);
+
+    switch (inputNumber) {
+      case 1:
+        rl.question('Nhập id cần tìm kiếm : ', (id) => {
+          const find = products.find((element) => element.id === parseInt(id));
+          console.log(find);
+          rl.close();
+        });
+        break;
+      case 2:
+        rl.question('Nhập title cần tìm kiếm : ', (title) => {
+          products.fo
+          const find = products.find((element) => element.title === title.trim());
+          console.log(find);
+          rl.close();
+        });
+        break;
+      case 3:
+        rl.question('Nhập description cần tìm kiếm : ', (description) => {
+          const find = products.find((element) => element.description === "Attractive DesignMetallic materialFour key hooksReliable & DurablePremium Quality");
+          console.log(find);
+          rl.close();
+        });
+        break;
+      case 4:
+        rl.question('Nhập price cần tìm kiếm : ', (price) => {
+          const find = products.find((element) => element.price === parseFloat(price));
+          console.log(find);
+          rl.close();
+        });
+        break;
+      case 5:
+        rl.question('Nhập rating cần tìm kiếm : ', (rating) => {
+          const find = products.find((element) => element.rating === parseFloat(rating));
+          console.log(find);
+          rl.close();
+        });
+        break;
+      case 6:
+        rl.question('Nhập stock cần tìm kiếm : ', (stock) => {
+          const find = products.find((element) => element.stock === parseFloat(stock));
+          console.log(find);
+          rl.close();
+        });
+        break;
+      case 7:
+        rl.question('Nhập category cần tìm kiếm : ', (category) => {
+          const find = products.find((element) => element.category === category.trim());
+          console.log(find);
+          rl.close();
+        });
+        break;
+      default:
+        console.log("Giá trị không hợp lệ.");
+        rl.close();
+    }
+  });
+}
+  // findInProduct(products); 
+// algorithm binary search 
+function binarySearchid(arr, target){
+  let start = 0;
+  let end = arr.length - 1;
+  while(start <= end){
+    let mid = Math.floor((start + end) / 2);
+    if (arr[mid].id < target) {
+      // Search the right half
+      start = mid + 1
+    } else if (arr[mid].id > target) {
+      // Search the left half
+      end = mid - 1
+    } else if (arr[mid].id === target) {
+      // Found target
+      return arr[mid]
+    }
+  }
+  return -1 ;
+}
+
+// let sortid = products.sort((a,b) => a.id - b.id);
+// console.log(binarySearchid(sortid, 30));
+
+
+
+function binarySearchprice(arr, target){
+  let start = 0;
+  let end = arr.length - 1;
+  while(start <= end){
+    let mid = Math.floor((start + end) / 2);
+    if (arr[mid].price < target) {
+      // Search the right half
+      start = mid + 1
+    } else if (arr[mid].price > target) {
+      // Search the left half
+      end = mid - 1
+    } else if (arr[mid].price === target) {
+      // Found target
+      return arr[mid]
+    }
+  }
+  return -1 ;
+}
+
+
+// let sortprice = products.sort((a,b) => a.price - b.price);
+// console.log(binarySearchprice(sortprice, 20));
+
+function binarySearchRating(arr, target){
+  let start = 0;
+  let end = arr.length - 1;
+  while(start <= end){
+    let mid = Math.floor((start + end) / 2);
+    if (arr[mid].rating < target) {
+      // Search the right half
+      start = mid + 1
+    } else if (arr[mid].rating > target) {
+      // Search the left half
+      end = mid - 1
+    } else if (arr[mid].rating === target) {
+      // Found target
+      return arr[mid]
+    }
+  }
+  return -1 ;
+}
+
+
+// let sortrating = products.sort((a,b) => a.rating - b.rating);
+//  console.log(binarySearchRating(sortrating, 4.92));
 
  
-// request 1: outnput include id and title with highest price in that list;
-function findMaxprice(products) {
-  //declare variable emty
-  let max = null;
-  let id = [];
-// the foreach function
-  products.forEach(function(value, index){
-    if(value.price > max || max === null){
-      max = value.price;
-      id = [index]
-    }else{
-      //If there are many products with the same highest price
-      if(value.price === max){
-        id.push(index);
+function binarySearchStock(arr, target){
+  let start = 0;
+  let end = arr.length - 1;
+  while(start <= end){
+    let mid = Math.floor((start + end) / 2);
+    if (arr[mid].stock< target) {
+      // Search the right half
+      start = mid + 1
+    } else if (arr[mid].stock > target) {
+      // Search the left half
+      end = mid - 1
+    } else if (arr[mid].stock === target) {
+      // Found target
+      return arr[mid]
+    }
+  }
+  return -1 ;
+}
+
+
+// let sortstock = products.sort((a,b) => a.stock - b.stock);
+//  console.log(binarySearchStock(sortstock,50));
+
+function binarySearchTitle(arr, target){
+    let start = 0;
+    let end = arr.length - 1;
+    while(start <= end){
+      let mid = Math.floor((start + end) / 2);
+      if (arr[mid].title < target.trim()) {
+        // Search the right half
+        start = mid + 1
+      } else if (arr[mid].title > target.trim()) {
+        // Search the left half
+        end = mid - 1
+      } else if (arr[mid].title === target.trim()) {
+        // Found target
+        return arr[mid]
       }
     }
-  });
-  id.forEach(function(item) {
-    
-    console.log("ID = " + products[item].id + " and Title is " + products[item].title);
-  });
-}
-//  findMaxprice(products);
-// request 2: Calculate the total price of all products: 
-let Total = 0
-products.forEach((Element)=>{
-  Total += (Element.price);
-});
-  //  console.log(Total);
-//help us calculate the total
-let total = products.reduce((subtotal,product)=> subtotal = subtotal+ product.price, 0 );
-  // console.log(total);
+    return -1 ;
+  }
+// sorttitle = products.sort((a,b) => a.title.localeCompare(b.title));
+// console.log(binarySearchTitle(products,"Handcraft Chinese style         "));
 
-//  request 3:  Count the number of products in each category: 
-
-// create functon filter 
-function filer(products){
-  category =[];
-  
-  products.forEach(function(Element){
-    let check = false;
-    //If it's already in the categories array, don't accept it
-    for(let i = 0; i < category.length; i++ ){
-      if(Element.category === category[i]){
-          check = true;
-          break;
-      }
+function binarySearchDe(arr, target){
+  let start = 0;
+  let end = arr.length - 1;
+  while(start <= end){
+    let mid = Math.floor((start + end) / 2);
+    if (arr[mid].description < target.trim()) {
+      // Search the right half
+      start = mid + 1
+    } else if (arr[mid].description > target.trim()) {
+      // Search the left half
+      end = mid - 1
+    } else if (arr[mid].description === target.trim()) {
+      // Found target
+      return arr[mid]
     }
-    if(check === false){
-      let count = 0;
-      category.push(Element.category);
-      products.forEach(function(value){
-        //if they are equal
-        //check each one until the end
-        if(value.category === category[category.length - 1]){
-            count++;  
-        }
-      })
-      console.log("NumBer product in category --"+ Element.category +"-- equal " + count)
-    }
-  });
-
+  }
+  return -1 ;
 }
-  // filer(products);
+// sortde = products.sort((a,b) => a.description.localeCompare(b.description));
+// console.log(binarySearchDe(sortde,"Attractive DesignMetallic materialFour key hooksReliable & DurablePremium Quality"));
 
-// request 4: Get a list of all product image links:
-
-function getLinkImage(products) {
-  let linkImage = [];
-  products.forEach((element) => {
-    let images = element.images;
-    if (Array.isArray(images)) {
-      images.forEach((item) => {
-        linkImage.push(item);
-      });
+function binarySearchCategory(arr, target){
+  let start = 0;
+  let end = arr.length - 1;
+  while(start <= end){
+    let mid = Math.floor((start + end) / 2);
+    if (arr[mid].category < target.trim()) {
+      // Search the right half
+      start = mid + 1
+    } else if (arr[mid].category > target.trim()) {
+      // Search the left half
+      end = mid - 1
+    } else if (arr[mid].category === target.trim()) {
+      // Found target
+      return arr[mid]
     }
-  });
-  return linkImage;
+  }
+  return -1 ;
 }
-
-const linkImages = getLinkImage(products);
-console.log("Number of image links:", linkImages.length);
-console.log("Image links:", linkImages);
+// sortca = products.sort((a,b) => a.category.localeCompare(b.category));
+// console.log(binarySearchCategory(sortca,"home-decoration"));
