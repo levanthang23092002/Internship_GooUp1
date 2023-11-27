@@ -547,32 +547,58 @@ const products = [
 ]
 //                      ---------Home Work 3-----------
 // Request 1: Reverse the list
+// add Do not ues reverse function and no copy new array ?
+function swap(arr, a, b) {
+  let temp = arr[a];
+  arr[a] = arr[b];
+  arr[b] = temp;
+} 
+
+let a = [1,2,3,4,5,6,7,8,9,10];
+let b = [1,2,3,4,5,6,7,8,9,10,11];
+
+function reverse(products){
+  let tem = products.length ;
+  for(let i = 0; i < tem / 2 ; i++  ){
+    swap(products, i, tem - i - 1 );
+  }
+  return products;
+}
+// console.log(reverse(a));
+console.log(reverse(b));
+
+console.log(reverse(products));
+
+
+
+
+
+
+
 // Do not ues reverse function
   function noReverse(products){
-    let i =products.length
+    let i = products.length -1;
     let reverseProduct2 = [];
-    for( i ; i >= 0 ; i-- ){
+    for( i; i >= 0 ; i-- ){
       reverseProduct2.push(products[i]);
     }
     return reverseProduct2;
   }
+
+
   // console.log(noReverse(products));
 // Use reverse function
-  let reverseProduct = products.reverse();
+  // let reverseProduct = products.reverse();
   // console.log(reverseProduct);
   // console.log(products);
 // Request 2: sort by title in products 
 // use sort function 
-  let sortProduct = products.sort((a,b) => a.title.localeCompare(b.title));
+  // let sortProduct = products.sort((a,b) => a.title.localeCompare(b.title));
   // console.log(sortProduct);
 
 //do not use sort function 
  //use 
-    function swap(arr, a, b) {
-      let temp = arr[a];
-      arr[a] = arr[b];
-      arr[b] = temp;
-    }
+    
     
  function selectionSort(products) {
   const { length } = products;
@@ -765,7 +791,7 @@ function binarySearchStock(arr, target){
 
 
 // let sortstock = products.sort((a,b) => a.stock - b.stock);
-//  console.log(binarySearchStock(sortstock,50));
+//  console.log(binarySearchStock(sortstock,52));
 
 function binarySearchTitle(arr, target){
     let start = 0;
@@ -829,3 +855,4 @@ function binarySearchCategory(arr, target){
 }
 // sortca = products.sort((a,b) => a.category.localeCompare(b.category));
 // console.log(binarySearchCategory(sortca,"home-decoration"));
+
