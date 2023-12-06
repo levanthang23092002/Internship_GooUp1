@@ -1,0 +1,27 @@
+[JS] Bài tập 10 - Map and Set
+
+inlistJS
+Labels Notifications
+Description Edit
+
+Làm quen với SET và MAP.
+
+Tạo Set orderld chứa danh sách các id của các order và Map orderDetails
+có key là orderId tương ứng và value là danh sách product, mỗi product bao
+gồm thông tin: productId , productQuantity, productName , price.
+
+1. Viết các hàm cần thiết cho CRUD order. Lưu ý:
+
+° Khi thêm order cần tạo mới orderld sử dụng  uuid , người dùng thêm vào ít
+nhất 1 sản phẩm cho order đó.
+
+* Khi cập nhật order, nếu tất cả product trong danh sách product của order
+đó đều có productQuantity bằng 0 thì hãy xoá order tương ứng
+
+2. Dựa trên danh sách sản phẩm của order, tính order có tổng giá trị price x
+productQuantity lớn nhất.
+
+3. Viết hàm in ra danh sách orderld
+
+Activity Hide Details
+
