@@ -23,13 +23,33 @@ function getYear(string) {
     return numbers;
 }
 
-function maxYear(arr){
-    let year = null;
+function listDecade(arr) {
+    let year = [];
     arr.forEach(element => {
-        if(year == null || element > year){
-            year = element;
-        }
+      let years = Math.floor(element / 10) * 10;
+      if (!year.includes(years)) {
+        year.push(years);
+      }
     });
+    return year;
+}
+
+function decadeMax(arr ){
+    const listDecades = listDecade(arr);
+    let count = 0;
+    let year = null;
+    listDecades.forEach( a =>{
+        let tem =0;
+        arr.forEach( b =>{
+            if(b%a < 10){
+                tem++;
+            }
+        })
+        if(year == null || tem > count){
+            count = tem;
+            year = a;
+        }
+    })
     const century =Math.floor(year / 100) ;
     const decade = Math.floor((year % 100) / 10) *10;
     console.log("Thập niên "+decade+" của thế kỉ "+ century);
@@ -37,6 +57,10 @@ function maxYear(arr){
   
 const years = getYear(containNumber);
 console.log(years);
+// console.log(listDecade(years));
+// const listyear =[1234,1990,1990,1990,1992,1993,1994,2020]
+decadeMax(years)
 
-maxYear(year);
-  
+
+
+
