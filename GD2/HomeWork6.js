@@ -4,8 +4,10 @@ function dateValidation(date){
     let elementDate = date.split("-");
     let day = parseInt(elementDate[0]);
     let month = parseInt(elementDate[1]);
-    let year = elementDate[2];
-
+    let year = parseInt(elementDate[2]);
+    if(month > 12 || month < 1){
+        return false;
+    }
     if(month == 1 || month == 3 || month == 5  ||  month == 7 || month == 8 || month == 10 || month == 12){
         if(day <= 31 && day > 0){
             return true;
@@ -43,4 +45,4 @@ function dateValidation(date){
     
    
 }
-console.log(dateValidation("30-02-2024"))
+module.exports = { dateValidation };

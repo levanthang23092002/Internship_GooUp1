@@ -32,50 +32,50 @@ axios.get(url).then(function (response) {
 });
 
 
-function myFunction() {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET','https://dummyjson.com/carts', true);
+// function myFunction() {
+//     var xhr = new XMLHttpRequest();
+//     xhr.open('GET','https://dummyjson.com/carts', true);
 
-    xhr.onload = function () {
-        if (xhr.status === 200) {
-            var responseData = JSON.stringify(xhr.responseText);
+//     xhr.onload = function () {
+//         if (xhr.status === 200) {
+//             var responseData = JSON.stringify(xhr.responseText);
           
-            const date = getdate();
-            const fileName = `${date}.js`;
-            const fileContent = responseData;
+//             const date = getdate();
+//             const fileName = `${date}.js`;
+//             const fileContent = responseData;
 
-            const blob = new Blob([fileContent], { type: 'text/javascript' });
-            const url = URL.createObjectURL(blob);
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = fileName;
-            link.click();
-        } else {
-            // Xử lý lỗi
-            console.error('Yêu cầu không thành công. Mã lỗi: ' + xhr.status);
-        }
-    };
+//             const blob = new Blob([fileContent], { type: 'text/javascript' });
+//             const url = URL.createObjectURL(blob);
+//             const link = document.createElement('a');
+//             link.href = url;
+//             link.download = fileName;
+//             link.click();
+//         } else {
+//             // Xử lý lỗi
+//             console.error('Yêu cầu không thành công. Mã lỗi: ' + xhr.status);
+//         }
+//     };
 
-    xhr.onerror = function () {
-        // Xử lý lỗi
-        console.error('Đã xảy ra lỗi trong quá trình gửi yêu cầu.');
-    };
+//     xhr.onerror = function () {
+//         // Xử lý lỗi
+//         console.error('Đã xảy ra lỗi trong quá trình gửi yêu cầu.');
+//     };
 
-    xhr.send();
-}
+//     xhr.send();
+// }
 
-fetch(url)
-    .then((response) => response.json())
-    .then((data) => {
-        const date = getdate();
-        const fileName = `${date}.js`;
-        const fileContent =JSON.stringify(data.carts);
+// fetch(url)
+//     .then((response) => response.json())
+//     .then((data) => {
+//         const date = getdate();
+//         const fileName = `${date}.js`;
+//         const fileContent =JSON.stringify(data.carts);
 
-        fs.writeFile(fileName, fileContent, (err) => {
-            if (err) {
-                console.error('Đã xảy ra lỗi khi tạo tệp:', err);
-            } else {
-                console.log('Tạo tệp thành công:', fileName);
-            }
-            });
-    });
+//         fs.writeFile(fileName, fileContent, (err) => {
+//             if (err) {
+//                 console.error('Đã xảy ra lỗi khi tạo tệp:', err);
+//             } else {
+//                 console.log('Tạo tệp thành công:', fileName);
+//             }
+//         });
+// });

@@ -51,15 +51,15 @@ function decadeMax(arr ){
         }
     })
     const century =Math.floor(year / 100) ;
-    const decade = Math.floor((year % 100) / 10) *10;
+    const decade = Math.floor((year % 100) );
     console.log("Thập niên "+decade+" của thế kỉ "+ century);
 }
   
 const years = getYear(containNumber);
 console.log(years);
-// console.log(listDecade(years));
-// const listyear =[1234,1990,1990,1990,1992,1993,1994,2020]
-decadeMax(years)
+console.log(listDecade(years));
+ const listyear =[1234,1990,1990,1990,1992,1993,1994,2020]
+decadeMax(listyear)
 
 
 
