@@ -21,7 +21,7 @@ function createFile(fileNames){
     fs.writeFileSync(fileName, content)
   });
 }
-// createFile(fileNames);
+createFile(fileNames);
 
 // filter filename in forder if it not true format
 
@@ -40,43 +40,39 @@ function checkDateTime(string) {
 }
 
 
-function filterFilename(src){
-  let listfiles =[];
-  let listfiletrues =[];
+function filterFilename(src) {
+  let listfiles = [];
+  let listfiletrues = [];
   var fileNames = fs.readdirSync(src);
-  fileNames.forEach(element =>{
+  fileNames.forEach(element => {
     let filename = element.split(/[_\.]/);
-    if(filename.length != 5){
-      listfiles.push(element);
-      return;
-    }else
-      if(filename[0] != "Gooup1"){
-         filename.push(element);
-        return;
-      }else
-        if(filename[1] != "User"){
-          listfiles.push(element);
-          return;
-        }else
-          if(filename[2] != "Tracking"){
-            listfiles.push(element);
-            return;
-          }else
-            if(checkDateTime(filename[3]) != true){
-
-              listfiles.push(element);
-              return;
-            }else
-              if(filename[4] != "txt"){
-                listfiles.push(element);
-                return;
-              }
-      listfiletrues.push(element);
-  })
-  return [listfiles, listfiletrues]
+    switch (true) {
+      case filename.length !== 5:
+        listfiles.push(element);
+        break;
+      case filename[0] !== "Gooup1":
+        filename.push(element);
+        break;
+      case filename[1] !== "User":
+        listfiles.push(element);
+        break;
+      case filename[2] !== "Tracking":
+        listfiles.push(element);
+        break;
+      case !checkDateTime(filename[3]):
+        listfiles.push(element);
+        break;
+      case filename[4] !== "txt":
+        listfiles.push(element);
+        break;
+      default:
+        listfiletrues.push(element);
+    }
+  });
+  return [listfiles, listfiletrues];
 }
 let list = filterFilename("./mydata")
-// console.log(list[1]);
+console.log(list[0]);
 
 function writeFileTrue(arr){
   arr.forEach(element=>{
