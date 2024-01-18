@@ -1,7 +1,7 @@
 const fs = require('fs');
 
 // Hàm để tạo chuỗi ngẫu nhiên
-function randomString(length) {
+function generateRandomString(length) {
   let result = '';
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   const charactersLength = characters.length;
@@ -11,7 +11,7 @@ function randomString(length) {
   return result;
 }
 
-// Hàm để chuyển đổi định dạng JSON thành đối tượng
+// Hàm chuyển đổi định dạng JSON 
 function parseJSONToObject(jsonString) {
   try {
     return JSON.parse(jsonString);
@@ -20,61 +20,70 @@ function parseJSONToObject(jsonString) {
   }
 }
 
-// Tạo danh sách 10 file
-for (let i = 1; i <= 10; i++) {
-  const fileName = `file${i}.json`;
-  let fileContent;
+// Hàm tạo 10 file
+function createFiles() {
+  for (let i = 1; i <= 10; i++) {
+    const fileName = `./files/file${i}.json`;
+    let fileContent;
 
-  // 50% file có định dạng JSON, 50% còn lại là chuỗi ngẫu nhiên
-  if (i % 2 === 0) {
-    const jsonContent = {
-      data: 'This is JSON content',
-      number: i
-    };
-    fileContent = JSON.stringify(jsonContent);
-  } else {
-    const string = randomString(10);
-    fileContent = string;
-  }
-
-  // Ghi nội dung file
-  fs.writeFile(fileName, fileContent, (err) => {
-    if (err) {
-      console.log(`Đã xảy ra lỗi khi tạo file ${fileName}: ${err}`);
+    // 50% file có định dạng JSON
+    if (i % 2 === 0) {
+      const jsonContent = {
+        data: 'This is JSON content',
+        number: i
+      };
+      fileContent = JSON.stringify(jsonContent);
     } else {
-      console.log(`Đã tạo file ${fileName} thành công!`);
-
-      // Đọc nội dung file sau khi tạo thành công
-      fs.readFile(fileName, 'utf8', (err, data) => {
-        if (err) {
-          console.log(`Đã xảy ra lỗi khi đọc file ${fileName}: ${err}`);
-          return;
-        }
-
-        let result;
-        try {
-          const jsonObject = parseJSONToObject(data);
-          if (jsonObject) {
-            result = 'OK';
-            console.log(`Đã đọc file ${fileName} thành công:`, jsonObject);
-          } else {
-            result = 'NOK & Cover';
-            console.log(`Đã đọc file ${fileName} không thành công. Định dạng JSON không hợp lệ.`);
-          }
-        } catch (error) {
-          result = 'NOK & Cover';
-          console.log(`Đã xảy ra lỗi khi đọc file ${fileName}:`, error);
-        }
-
-        // Ghi kết quả vào file "result.txt"
-        fs.appendFile('result.txt', `${fileName}: ${result}\n`, (err) => {
-          if (err) {
-            console.log(`Đã xảy ra lỗi khi ghi kết quả vào file result.txt: ${err}`);
-          } else {
-            console.log(`Đã ghi kết quả vào file result.txt.`);
-          }
-        });
-      });
+      const randomString = generateRandomString(10);
+      fileContent = randomString;
     }
-  });
+
+    // Ghi nội dung file
+    fs.writeFileSync(fileName, fileContent);
+    console.log(`Đã tạo file ${fileName} thành công!`);
+  }
 }
+// createFiles();
+
+
+
+// Hàm để đọc và xử lý từng file
+function readAndProcessFiles() {
+  for (let i = 1; i <= 10; i++) {
+    const fileName = `./files/file${i}.json`;
+
+    // Đọc nội dung file
+    fs.readFile(fileName, 'utf8', (err, data) => {
+      if (err) {
+        console.log(`Đã xảy ra lỗi khi đọc file ${fileName}: ${err}`);
+        return;
+      }
+
+      let result;
+      try {
+        const jsonObject = parseJSONToObject(data);
+        if (jsonObject) {
+          result = 'OK';
+          console.log(`Đã đọc file ${fileName} thành công:`, jsonObject);
+        } else {
+          result = 'NOK & Cover';
+          console.log(`Đã đọc file ${fileName} không thành công. Định dạng JSON không hợp lệ.`);
+        }
+      } catch (error) {
+        result = 'NOK & Cover';
+        console.log(`Đã xảy ra lỗi khi đọc file ${fileName}:`, error);
+      }
+
+      // Ghi kết quả vào file "result.txt"
+      fs.appendFile('result.txt', `${fileName}: ${result}\n`, (err) => {
+        if (err) {
+          console.log(`Đã xảy ra lỗi khi ghi kết quả vào file result.txt: ${err}`);
+        } else {
+          console.log(`Đã ghi kết quả vào file result.txt.`);
+        }
+      });
+    });
+  }
+}
+
+readAndProcessFiles();
