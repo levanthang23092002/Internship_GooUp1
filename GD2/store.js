@@ -6,11 +6,6 @@ export const store = {
       name: 'Laptop',
       details: {
         brand: 'Dell',
-        specifications: {
-          processor: 'Intel i7',
-          memory: '16GB',
-          storage: '512GB SSD',
-        },
       },
       getPrice: () => 1200,
     },
@@ -30,7 +25,6 @@ export const store = {
     {
       id: 3,
       name: 'Headphones',
-      getPrice: () => 150,
     },
   ],
 };
