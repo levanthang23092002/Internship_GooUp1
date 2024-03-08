@@ -1,62 +1,61 @@
-CREATE DATABASE hotel_management_system;
-USE hotel_management_system;
+CREATE DATABASE hotel_booking_system;
 
 -- Tạo bảng users
 CREATE TABLE users (
-  idUser BIGINT(10) PRIMARY KEY,
-  name VARCHAR(20) ,
-  phone VARCHAR(11),
-  address VARCHAR(100),
-  email VARCHAR(50),
-  password VARCHAR(12)
+idUser BIGINT PRIMARY KEY,
+name VARCHAR(20),
+phone VARCHAR(11),
+address VARCHAR(100),
+email VARCHAR(50),
+password VARCHAR(12)
 );
 
 -- Tạo bảng hotels
 CREATE TABLE hotels (
-  idHotel BIGINT(10) PRIMARY KEY,
-  idOwner BIGINT(10),
-  name VARCHAR(20),
-  address VARCHAR(100),
-  email VARCHAR(50),
-  phone VARCHAR(11),
-  description VARCHAR(100),
-  status BOOLEAN,
-  FOREIGN KEY (idOwner) REFERENCES users(idUser)
+idHotel BIGINT PRIMARY KEY,
+idOwner BIGINT,
+name VARCHAR(20),
+address VARCHAR(100),
+email VARCHAR(50),
+phone VARCHAR(11),
+description VARCHAR(100),
+status BOOLEAN,
+FOREIGN KEY (idOwner) REFERENCES users(idUser)
 );
 
 -- Tạo bảng rooms
 CREATE TABLE rooms (
-  idRoom BIGINT(10) PRIMARY KEY,
-  name VARCHAR(20),
-  area VARCHAR(20),
-  type VARCHAR(20),
-  status VARCHAR(20),
-  price DECIMAL(10, 2),
-  idHotel BIGINT(10),
-  floor VARCHAR(3),
-  FOREIGN KEY (idHotel) REFERENCES hotels(idHotel)
+idRoom BIGINT PRIMARY KEY,
+name VARCHAR(20),
+area VARCHAR(20),
+type VARCHAR(20),
+status VARCHAR(20),
+price DECIMAL(10, 2),
+idHotel BIGINT,
+floor VARCHAR(3),
+FOREIGN KEY (idHotel) REFERENCES hotels(idHotel)
 );
 
 -- Tạo bảng evaluate
 CREATE TABLE evaluate (
-  idEvaluate BIGINT(10) PRIMARY KEY,
-  idUser BIGINT(10),
-  idHotel BIGINT(10),
-  description VARCHAR(100),
-  star INT,
-  FOREIGN KEY (idUser) REFERENCES users(idUser),
-  FOREIGN KEY (idHotel) REFERENCES hotels(idHotel)
+idEvaluate BIGINT PRIMARY KEY,
+idUser BIGINT,
+idHotel BIGINT,
+description VARCHAR(100),
+star INT,
+FOREIGN KEY (idUser) REFERENCES users(idUser),
+FOREIGN KEY (idHotel) REFERENCES hotels(idHotel)
 );
 
 -- Tạo bảng reservations
 CREATE TABLE reservations (
-  idReser BIGINT(10) PRIMARY KEY,
-  idUser BIGINT(10),
-  checkin DATETIME,
-  checkout DATETIME,
-  idRoom BIGINT(10),
-  FOREIGN KEY (idUser) REFERENCES users(idUser),
-  FOREIGN KEY (idRoom) REFERENCES rooms(idRoom)
+idReser BIGINT PRIMARY KEY,
+idUser BIGINT,
+checkin TIMESTAMP,
+checkout TIMESTAMP,
+idRoom BIGINT,
+FOREIGN KEY (idUser) REFERENCES users(idUser),
+FOREIGN KEY (idRoom) REFERENCES rooms(idRoom)
 );
 
 INSERT INTO users (idUser, name, phone, address, email, password)
