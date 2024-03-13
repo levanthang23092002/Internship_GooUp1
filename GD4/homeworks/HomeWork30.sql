@@ -1,4 +1,8 @@
 // Tạo database hotel_management_system
+(phi thường hoá): Đây là kỹ thuật phổ biến trong CSDL NoSQL để tối ưu hóa truy vấn.
+ Thay vì duy trì các mối quan hệ và khóa ngoại giữa các bảng như trong CSDL SQL, 
+ dữ liệu trong CSDL NoSQL thường được tổ chức sao cho các truy vấn cụ thể được thực hiện một cách hiệu quả. 
+ Điều này có thể bao gồm việc nhúng dữ liệu, sao chép dữ liệu hoặc sử dụng cấu trúc dữ liệu phù hợp cho mỗi truy vấn.
 use hotel_management_system;
 
 // Tạo collection users
