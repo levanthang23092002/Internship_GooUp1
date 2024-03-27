@@ -1,20 +1,15 @@
 const express = require('express');
 const app = express();
+const apiRoutes = require('./routes/apiRoutes');
 
-// Middleware ghi log
-const logger = (req, res, next) => {
-    console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
+app.use('/api', (req, res, next) => {
+    console.log('Custom middleware');
     next();
-};
+  });
 
-app.use(logger);
-app.get('/home', (req, res) => {
-
-    res.send('Hello world');
-});
+app.use('/api', apiRoutes);
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
     console.log(`Server đang lắng nghe tại http://localhost:${port}`);
-
 });
