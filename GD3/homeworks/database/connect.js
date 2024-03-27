@@ -42,7 +42,54 @@ const User = {
                 callback(null, results.rows);
             }
         });
+    },
+    getUser: (userId,callback) => {
+      
+        let queryroom =` SELECT u.name, u.phone, u.address, u.email From users as u where idUser = ${userId}; `
+        pool.query(queryroom, (error, results) => {
+            if (error) {
+                console.error('Error executing query:', error);
+                callback(error, null);
+            } else {
+                callback(null, results.rows);
+            }
+        });
+    },
+    getAllRoomBooking: (userId,callback) => {
+        let queryroom = ` SELECT r.name, r.type, r.status, r.price, r.floor FROM rooms as r Left JOIN reservations as re On r.idRoom = re.idRoom where  re.idUser = ${userId} order by re.checkin DESC LIMIT 10 OFFSET 0; `
+        pool.query(queryroom, (error, results) => {
+            if (error) {
+                console.error('Error executing query:', error);
+                callback(error, null);
+            } else {
+                callback(null, results.rows);
+            }
+        });
+    },
+    getRoomBooking: (roomId, callback) => {
+        let queryroom = `SELECT r.name, r.type, r.status, r.price, r.floor FROM rooms as r where  r.idRoom = ${roomId} ;`
+        pool.query(queryroom, (error, results) => {
+            if (error) {
+                console.error('Error executing query:', error);
+                callback(error, null);
+            } else {
+                callback(null, results.rows);
+            }
+        });
+    },
+    getAllEvaluate: (callback) => {
+        let queryroom = " SELECT h.name , h.email, h.address, e.description as comment , e.star From hotels as h JOIN evaluate as e On h.idHotel = e.idHotel where e.idUser = 1"
+        pool.query(queryroom, (error, results) => {
+            if (error) {
+                console.error('Error executing query:', error);
+                callback(error, null);
+            } else {
+                callback(null, results.rows);
+            }
+        });
     }
+
+
 };
 
 module.exports = User;
