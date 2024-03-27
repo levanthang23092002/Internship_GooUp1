@@ -93,7 +93,7 @@ SELECT   h.name as hotel, h.address, h.email, h.phone, h.description, h.status ,
 FROM hotels AS h
 RIGHT JOIN evaluate AS e ON e.idHotel = h.idHotel
 WHERE h.idOwner = 1
-GROUP BY u.idUser, u.name, h.idHotel, h.name, h.address
+GROUP BY e.idUser, h.idHotel, h.name, h.address
 Having h.description like '%giá rẻ%'
 order by AVG(e.star)
 LIMIT 10 OFFSET 0

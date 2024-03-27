@@ -3,8 +3,8 @@ const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController');
 
-router.get('/users', userController.getUsers);
-
+router.get('/Hotel', userController.getAllHotel);
+router.get('/Room', userController.getAllRoom);
 
 // Định nghĩa các route API khác ở đây
 
