@@ -4,7 +4,8 @@
   "description": "here is place container the my homework",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node HomeWork41.js",
+    "start:dev": "nodemon HomeWork41.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -14,5 +15,8 @@
     "express": "^4.19.2",
     "mysql": "^2.18.1",
     "pg": "^8.11.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
   }
 }
