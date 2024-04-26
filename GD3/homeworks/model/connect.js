@@ -1,7 +1,7 @@
 require('dotenv').config();
-const bcrypt = require('bcrypt');
 const { Pool } = require('pg');
 const jwt = require('jsonwebtoken');
+const LocalStrategy = require('passport-local').Strategy;
 
 
 const dbPort = process.env.DB_PORT;
@@ -32,6 +32,7 @@ function connectToPostgreSQL() {
 }
 connectToPostgreSQL()
 const User = {
+    
     getAllHotel: (callback) => {
         let queryhotel = "SELECT   h.name as hotel, h.address, h.email, h.phone, h.description, h.status , AVG(e.star) as Star FROM hotels AS h RIGHT JOIN evaluate AS e ON e.idHotel = h.idHotel WHERE h.idOwner = 4 GROUP BY e.idUser, h.idHotel, h.name, h.address  order by AVG(e.star) LIMIT 10 OFFSET 0"
         pool.query(queryhotel, (error, results) => {
@@ -147,7 +148,35 @@ login: (userData, callback) => {
       }
     }
   });
-}
+},
+configurePassport: (passport) => {
+    passport.use(
+      new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
+        const query = 'SELECT * FROM users WHERE email = $1 and password = $2';
+        const values = [email, password];
+
+        pool.query(query, values, (error, results) => {
+          if (error) {
+            console.error('Lỗi thực thi truy vấn:', error);
+            return done(error);
+          }
+
+          if (results.rows.length === 0) {
+            const error = 'Thông tin đăng nhập không hợp lệ';
+            return done(null, false, { message: error });
+          }
+
+          const user = results.rows[0];
+
+          const token = jwt.sign({ user }, process.env.JWT_SECRET, { expiresIn: '30s' });
+          return done(null, { token, user });
+        });
+      })
+    );
+  }
+
+
+ 
 
     
 };

@@ -1,4 +1,6 @@
 const User = require('../model/connect');
+const passport = require('passport');
+const jwt = require('jsonwebtoken');
 
 exports.register = (req, res) => {
   // Extract user data from request body
@@ -50,8 +52,35 @@ exports.login = (req, res) => {
     }
   });
 };
+exports.loginpassport = (req, res) => {
+  // Extract user credentials from request body
+  const { email, password } = req.body;
 
-const jwt = require('jsonwebtoken');
+  // Perform login logic
+  passport.authenticate('local', { session: false }, (error, result) => {
+    if (error) {
+      return res.status(500).json({
+        success: false,
+        message: 'Internal server error',
+        error: error
+      });
+    } else if (!result) {
+      return res.status(401).json({
+        success: false,
+        message: 'Invalid email or password',
+        error: ''
+      });
+    } else {
+      return res.status(200).json({
+        success: true,
+        message: 'User logged in successfully',
+        data: result
+      });
+    }
+  })(req, res);
+};
+
+
 
 exports.verifyToken = (req, res, next) => {
   const authtoken = req.headers['authorization'];
