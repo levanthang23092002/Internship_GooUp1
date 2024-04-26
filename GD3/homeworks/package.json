@@ -5,15 +5,19 @@
   "main": "index.js",
   "scripts": {
     "start": "node HomeWork41.js",
-    "start:dev": "nodemon HomeWork41.js",
+    "start:dev": "nodemon HomeWork48.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "Lê Văn Thắng",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "cookie-parser": "^1.4.6",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
     "mysql": "^2.18.1",
     "pg": "^8.11.3"
   },

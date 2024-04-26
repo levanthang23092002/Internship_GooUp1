@@ -1,0 +1,10 @@
+GET http://localhost:4000/users/user/3
+Authorization: Beaer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkdXNlciI6IjUiLCJuYW1lIjoidGhhbmciLCJwaG9uZSI6IjA5NjY5NDg5MTQiLCJhZGRyZXNzIjpudWxsLCJlbWFpbCI6ImxldGhpY2RAZXhhbXBsZS5jb20iLCJwYXNzd29yZCI6InBhc3M0NTY1In0sImlhdCI6MTcxNDEwMzYxMiwiZXhwIjoxNzE0MTA3MjEyfQ.DEbWuVFmJlbSp7X5tkoa8mjqstZIFnA8UxucY40hhd4
+###
+POST http://localhost:4000/auth/login
+Content-Type: application/json
+
+{
+"email":"lethicd@example.com",
+"password": "pass4565"
+}

@@ -1,4 +1,4 @@
-const User = require('../database/connect');
+const User = require('../model/connect');
 
 exports.getAllHotel = (req, res) => {
   User.getAllHotel((error, results) => {
